@@ -1,12 +1,9 @@
+package com.example.activitylifecycle;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-package com.sampleexample.admin.mesho;
-
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,16 +11,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i("lifecycle","onCreate invoked");
     }
-    public void btnclick(View view){
-        EditText edt = findViewById(R.id.editText);
-        EditText edt1 = findViewById(R.id.editText2);
-        EditText edt2 = findViewById(R.id.editText3 );
-        TextView txt1 =findViewById(R.id.textView);
-        TextView txt2 =findViewById(R.id.textView2 );
-        TextView txt3 =findViewById(R.id.textView3);
-        txt1.setText("hello"+edt .getText().toString() );
-        txt2.setText("lastname"+edt1 .getText().toString() );
-        txt3.setText("email"+edt2 .getText().toString() );
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("lifecycle","onStart invoked");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("lifecycle","onResume invoked");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("lifecycle","onPause invoked");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("lifecycle","onStop invoked");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("lifecycle","onDestroy invoked");
+
     }
 }

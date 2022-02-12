@@ -1,42 +1,107 @@
+package com.example.validation;
 
-package com.sampleexample.admin.lifecycle;
+import androidx.appcompat.app.AppCompatActivity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText name,email,number,password,confirm_password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("Activity Lifecycle","onCreate invoked");
     }
-    protected  void onStart(){
-        super.onStart();
-        Log.d("lifecycle","onStart invoked");
+
+    public boolean nameValidate(){
+        name=findViewById(R.id.name);
+        if (name.getText().toString().isEmpty()){
+            name.setError("Name field cannot be empty");
+            return false;
+        }
+        else {
+            return true;
+        }
     }
-    protected  void onResume(){
-        super.onResume();
-        Log.d("lifecycle","onResume invoked");
+    public boolean emailValidate(){
+        email=findViewById(R.id.email);
+        String email_pattern="[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (email.getText().toString().isEmpty()){
+            email.setError("Email field cannot be Empty");
+            return false;
+        }
+        else if(!email.getText().toString().matches(email_pattern)){
+            email.setError("Email is not Valid");
+            return false;
+
+        }
+        else {
+            return  true;
+        }
     }
-    protected  void onPause(){
-        super.onPause();
-        Log.d("lifecycle","onPause invoked");
+    public  boolean numberValidate(){
+        number=findViewById(R.id.number);
+
+        if(number.getText().toString().isEmpty()){
+            number.setError("Mobile Number cannot be Empty");
+            return  false;
+        }
+        else if(number.getText().toString().length()!=10){
+            number.setError("Invalid Mobile Number");
+            return false;
+
+        }
+        else{
+            return true;
+        }
+
     }
-    protected  void onStop(){
-        super.onStop();
-        Log.d("lifecycle","onStop invoked");
+    public  boolean validatePassword(){
+        password=findViewById(R.id.password);
+        String password_pattern= "^" +
+                //"(?=.*[0-9])" +         //at least 1 digit
+                //"(?=.*[a-z])" +         //at least 1 lower case letter
+                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{4,}" +               //at least 4 characters
+                "$";
+        if (password.getText().toString().isEmpty()){
+            password.setError("Password Cannot be empty");
+            return  false;
+        }
+        else if(!password.getText().toString().matches(password_pattern)){
+            password.setError("Entered Password is Weak");
+            return  false;
+        }
+        else{
+            return true;
+        }
+
     }
-    protected  void onRestart(){
-        super.onRestart();
-        Log.d("lifecycle","onRestart invoked");
+
+    public boolean validateConfirmPassword(){
+        confirm_password=findViewById(R.id.confirm_password);
+        password=findViewById(R.id.password);
+        if(confirm_password.getText().toString().isEmpty()){
+            confirm_password.setError("This field Cannot be Empty");
+            return false;
+        }
+        else if(!confirm_password.getText().toString().equals(password.getText().toString())){
+            confirm_password.setError("Confirm Password should be same as Password");
+            return false;
+        }
+        else {
+            return true;
+        }
     }
-    protected  void onDestroy(){
-        super.onDestroy();
-        Log.d("lifecycle","onDestroy invoked");
+    public void onSubmit(View view){
+        if(nameValidate()&&emailValidate()&&numberValidate()&&validatePassword()&&validateConfirmPassword()){
+            Toast.makeText(this,"Registration Successful",Toast.LENGTH_LONG).show();
+        }
     }
 }
-
-</android.support.constraint.ConstraintLayout>
