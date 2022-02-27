@@ -1,4 +1,3 @@
-//Implement Options Menu to navigate to activities.
 package com.example.co3_q4;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,14 +7,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
